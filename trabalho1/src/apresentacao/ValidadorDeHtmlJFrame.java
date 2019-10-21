@@ -6,6 +6,7 @@
 package apresentacao;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,11 +14,53 @@ import javax.swing.JFileChooser;
  */
 public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
 
-    /**
+    // Atributo estática para pegar o arquivo que está sendo importado pelo ImportarArquivoForm
+    private static JFileChooser arquivoImportado;
+    
+    // Atributo para pegar o diretório onde se encontra o arquivo
+    private String diretorioArquivo;
+    
+    // Atributo para pegar o diretório completo do arquivo
+    private String diretorioCompleto;
+
+     /**
      * Creates new form ValidadorDeHtmlJFrame
      */
     public ValidadorDeHtmlJFrame() {
         initComponents();
+    }
+    
+    public static JFileChooser getArquivoImportado() {
+        return arquivoImportado;
+    }
+
+    public static void setArquivoImportado(JFileChooser arquivoImportado) {
+        if(arquivoImportado != null)
+            ValidadorDeHtmlJFrame.arquivoImportado = arquivoImportado;
+        else
+            throw new IllegalArgumentException("O Arquivo não pode ser nulo");
+    }
+    
+     public String getDiretorioArquivo() {
+        return diretorioArquivo;
+    }
+
+    public void setDiretorioArquivo(String diretorioArquivo) {
+        if(!diretorioArquivo.isEmpty())
+            this.diretorioArquivo = diretorioArquivo;
+        else
+            throw new IllegalArgumentException("Diretório inválido");
+    }
+
+    public String getDiretorioCompleto() {
+        return diretorioCompleto;
+    }
+
+    public void setDiretorioCompleto(String diretorioCompleto) {
+        if(!diretorioCompleto.isEmpty())
+            this.diretorioCompleto = diretorioCompleto;
+        else
+            throw new IllegalArgumentException("Diretório inválido");
     }
 
     /**
@@ -43,6 +86,11 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
         jLabel1.setText("Arquivo:");
 
         analisarButton.setText("Analisar");
+        analisarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                analisarButtonActionPerformed(evt);
+            }
+        });
 
         selecionarArquivoButton.setText("Selecionar");
         selecionarArquivoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -115,13 +163,27 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selecionarArquivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarArquivoButtonActionPerformed
+       try{
         ImportarArquivoForm importarArquivoForm = new ImportarArquivoForm();
         importarArquivoForm.setVisible(true);
-        
-        //importarArquivoForm.dispose();
-        //JFileChooser arquivo = importarArquivoForm.getArquivoImportado();
+       }
+       catch(Exception ex){
+           JOptionPane.showMessageDialog(this, "Erro ao ler arquivo");
+       }
     }//GEN-LAST:event_selecionarArquivoButtonActionPerformed
 
+    private void analisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisarButtonActionPerformed
+        obterValoresArquivos();
+        
+    }//GEN-LAST:event_analisarButtonActionPerformed
+
+    private void obterValoresArquivos(){
+    if(arquivoImportado != null){
+            this.setDiretorioCompleto(arquivoImportado.getSelectedFile().getAbsolutePath());
+            this.setDiretorioArquivo( arquivoImportado.getCurrentDirectory().toString());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

@@ -6,31 +6,19 @@
 package apresentacao;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author heichstadt
  */
 public class ImportarArquivoForm extends javax.swing.JFrame {
-
-    private JFileChooser arquivoImportado;
     
     /**
      * Creates new form ImportarArquivoForm
      */
     public ImportarArquivoForm() {
         initComponents();
-    }
-
-    public JFileChooser getArquivoImportado() {
-        return arquivoImportado;
-    }
-
-    public void setArquivoImportado(JFileChooser arquivoImportado) {
-        if(arquivoImportado != null)
-            this.arquivoImportado = arquivoImportado;
-        else
-            throw new IllegalArgumentException("O Arquivo não pode ser nulo");
     }
 
     /**
@@ -67,7 +55,8 @@ public class ImportarArquivoForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivoActionPerformed
-        this.setArquivoImportado(arquivo);
+        ValidadorDeHtmlJFrame.setArquivoImportado(arquivo);
+        this.dispose();
     }//GEN-LAST:event_arquivoActionPerformed
 
     /**
