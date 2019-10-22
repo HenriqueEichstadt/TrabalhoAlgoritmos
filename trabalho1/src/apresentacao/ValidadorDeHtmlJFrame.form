@@ -30,7 +30,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="379" max="-2" attributes="0"/>
+                      <Component id="campoArquivo" min="-2" pref="379" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="selecionarArquivoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -48,7 +48,7 @@
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoArquivo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="analisarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="selecionarArquivoButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -67,7 +67,10 @@
         <Property name="text" type="java.lang.String" value="Arquivo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="campoArquivo">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="analisarButton">
       <Properties>

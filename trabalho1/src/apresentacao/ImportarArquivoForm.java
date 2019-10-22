@@ -1,17 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apresentacao;
 
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-
-/**
- *
- * @author heichstadt
- */
 public class ImportarArquivoForm extends javax.swing.JFrame {
     
     /**
@@ -56,6 +44,7 @@ public class ImportarArquivoForm extends javax.swing.JFrame {
 
     private void arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivoActionPerformed
         ValidadorDeHtmlJFrame.setArquivoImportado(arquivo);
+        ValidadorDeHtmlJFrame.setCampoArquivo(arquivo.getSelectedFile().getAbsolutePath());
         this.dispose();
     }//GEN-LAST:event_arquivoActionPerformed
 

@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apresentacao;
-
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
-/**
- *
- * @author heichstadt
- */
 public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
 
     // Atributo estática para pegar o arquivo que está sendo importado pelo ImportarArquivoForm
@@ -63,6 +54,18 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
             throw new IllegalArgumentException("Diretório inválido");
     }
 
+    public static JTextField getCampoArquivo() {
+        return campoArquivo;
+    }
+
+    public static void setCampoArquivo(String campoArquivo) {
+        if(!campoArquivo.isEmpty())
+            ValidadorDeHtmlJFrame.campoArquivo.setText(campoArquivo);
+        else
+            throw new IllegalArgumentException("Campo arquivo inválido");
+    }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,7 +76,7 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        campoArquivo = new javax.swing.JTextField();
         analisarButton = new javax.swing.JButton();
         selecionarArquivoButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -135,7 +138,7 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(campoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(selecionarArquivoButton)
                         .addGap(18, 18, 18)
@@ -149,7 +152,7 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(analisarButton)
                     .addComponent(selecionarArquivoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -221,10 +224,10 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton analisarButton;
+    private static javax.swing.JTextField campoArquivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextArea resultadoTextArea;
     private javax.swing.JButton selecionarArquivoButton;
     private javax.swing.JTable tagsEncontradasTable;
