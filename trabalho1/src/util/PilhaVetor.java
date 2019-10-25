@@ -1,5 +1,8 @@
 package util;
 
+import util.Pilha.PilhaCheiaException;
+import util.Pilha.Pilha;
+
 public class PilhaVetor<T> implements Pilha<T>{
     private T[] info;
     private int limite;

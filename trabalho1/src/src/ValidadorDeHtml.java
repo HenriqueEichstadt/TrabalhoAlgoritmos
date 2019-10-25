@@ -1,10 +1,17 @@
 package src;
 
-import java.util.regex.Pattern;
+import util.ListaDuplamenteEncadeada.ListaDuplamenteEncadeada;
 
 public class ValidadorDeHtml {
     private String htmlText;
+    private ListaDuplamenteEncadeada<HtmlTag> tags;
 
+    public ValidadorDeHtml() {
+        tags = new ListaDuplamenteEncadeada<>();
+    }
+    
+    
+    
     public String getHtmlText() {
         return htmlText;
     }

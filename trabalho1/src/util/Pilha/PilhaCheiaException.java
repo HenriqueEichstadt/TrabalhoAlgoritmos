@@ -1,4 +1,4 @@
-package util;
+package util.Pilha;
 
 public class PilhaCheiaException extends RuntimeException{
 
