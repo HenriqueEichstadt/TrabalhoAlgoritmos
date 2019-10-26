@@ -2,31 +2,33 @@ package trabalho1;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import src.LeitorDeHtml;
+import util.ListaEstatica.ListaEstatica;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        String regex = "(?<=<\\/?)([^ >/]+)";
+        LeitorDeHtml leitor = LeitorDeHtml.createInstance();
 
-        String html
-            = "<html>\n"
-            + "<body>"
-            + "<h1>Título</h1>\n"
-            + "<p sd=\"asdsad\">\n"
-            + "<input type=\"submit\">\n"
-            + "<footer>dasdasdsadas</footer>\n"
-            + "</body>\n"
-            + "</html>\n";
+        leitor.setPath("D:\\Desktop\\htmlDocument.html");
+        String html = leitor.getHtmlContent();
 
-    Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-    Matcher matcher = pattern.matcher(html);
-       
-
-    while (matcher.find()) {
-            for (int i = 1; i <= matcher.groupCount(); i++) {
-                System.out.println("Group " + i + ": " + matcher.group(i));
-            }
+        //String regex = "(?<=<\\/?)([^ >/]+)";
+        String regex = "<\\/?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*?\"|'.*?'|[\\^'\">\\s]+))?)+\\s*|\\s*)\\/?>";
+        String regex2 = "<\\/?\\w+((\\s+\\w+(\\s*=\\s*(?:\"(.|\\n)*?\"|'(.|\\n)*?'|[^'\">\\s]+))?)+\\s*|\\s*)\\/?>";
+        
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+        Matcher matcher = pattern.matcher(html);
+        String mensagem = "";
+        ListaEstatica<String> lista = new ListaEstatica<>();
+        
+        while (matcher.find()) {
+            mensagem += "Full match: " + matcher.group(0) + "\n";
+            lista.inserir(matcher.group(0));
         }
+        JOptionPane.showMessageDialog(null, lista.toString());
     }
 }
+

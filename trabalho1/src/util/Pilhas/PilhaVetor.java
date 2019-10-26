@@ -1,7 +1,4 @@
-package util;
-
-import util.Pilha.PilhaCheiaException;
-import util.Pilha.Pilha;
+package util.Pilhas;
 
 public class PilhaVetor<T> implements Pilha<T>{
     private T[] info;

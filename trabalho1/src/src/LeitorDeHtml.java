@@ -3,34 +3,46 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class LeitorDeHtml {
 
+    private static LeitorDeHtml leitorDeHtml;
     private Path path;
     private String htmlContent;
+    private FileSystem fileSystem;
 
-    public LeitorDeHtml() {
+    private LeitorDeHtml() {
+        fileSystem = FileSystems.getDefault();
+    }
+
+    public static LeitorDeHtml createInstance(){
+        if(leitorDeHtml == null)
+            leitorDeHtml = new LeitorDeHtml();     
+        return leitorDeHtml;
     }
 
     public Path getPath() {
         return path;
     }
 
-    public void setPath(Path path) {
+    public void setPath(String path) {
         if (path != null) {
-            this.path = path;
+            this.path = fileSystem.getPath(path);
         } else {
             throw new IllegalArgumentException("Diretório inválido");
         }
     }
 
     public String getHtmlContent() {
-        return htmlContent;
+        obterHtml();
+        return this.htmlContent;
     }
 
-    public void setHtmlContent(String htmlContent) {
+    private void setHtmlContent(String htmlContent) {
         if (!htmlContent.isEmpty()) {
             this.htmlContent = htmlContent;
         } else {
@@ -38,17 +50,10 @@ public class LeitorDeHtml {
         }
     }
 
-    private String getHtmlString() {
-        return "";
-    }
-
-    public String obterhtml() {
+    private void obterHtml(){
         try {
-            if (Files.exists(this.path)) {
-                FileReader fr;
-
-                fr = new FileReader(this.path.toFile());
-
+            if (diretorioExiste()) {
+                FileReader fr = new FileReader(this.path.toFile());
                 BufferedReader br = new BufferedReader(fr);
                 String content = "";
                 while (br.ready()) {
@@ -61,7 +66,6 @@ public class LeitorDeHtml {
         } catch (IOException exc){
             //TODO tratar a exceção
         }
-        return this.getHtmlString();
     }
     
     public boolean diretorioExiste(){

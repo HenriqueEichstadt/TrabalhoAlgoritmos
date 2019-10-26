@@ -27,7 +27,7 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
      * Creates new form ValidadorDeHtmlJFrame
      */
     public ValidadorDeHtmlJFrame() {
-        this.leitorDeHtml = new LeitorDeHtml();
+        this.leitorDeHtml = LeitorDeHtml.createInstance();
         this.validadorDeHtml = new ValidadorDeHtml();
         initComponents();
     }
@@ -189,10 +189,14 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_selecionarArquivoButtonActionPerformed
 
     private void analisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisarButtonActionPerformed
-        obterValoresArquivos();
-
-        leitorDeHtml.setPath(this.diretorioCompleto);
-
+        try {
+            obterValoresArquivos();
+            leitorDeHtml.setPath(this.diretorioCompleto);
+            String mensagem = validadorDeHtml.executar();
+            resultadoTextArea.append(mensagem);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_analisarButtonActionPerformed
 
     private void obterValoresArquivos() {
