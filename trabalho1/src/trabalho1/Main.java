@@ -3,6 +3,7 @@ package trabalho1;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import src.HtmlTag;
 import src.LeitorDeHtml;
 import util.ListaEstatica.ListaEstatica;
 
@@ -10,7 +11,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        LeitorDeHtml leitor = LeitorDeHtml.createInstance();
+        //HtmlTag html = new HtmlTag("input", 'I')
+    }
+}
+
+/*
+
+LeitorDeHtml leitor = LeitorDeHtml.createInstance();
 
         leitor.setPath("D:\\Desktop\\htmlDocument.html");
         String html = leitor.getHtmlContent();
@@ -29,6 +36,5 @@ public class Main {
             lista.inserir(matcher.group(0));
         }
         JOptionPane.showMessageDialog(null, lista.toString());
-    }
-}
 
+*/

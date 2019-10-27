@@ -11,9 +11,6 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
     // Atributo estática para pegar o arquivo que está sendo importado pelo ImportarArquivoForm
     private static JFileChooser arquivoImportado;
 
-    // Atributo para pegar o diretório onde se encontra o arquivo
-    private String diretorioArquivo;
-
     // Atributo para pegar o diretório completo do arquivo
     private String diretorioCompleto;
 
@@ -44,18 +41,6 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
         }
     }
 
-    public String getDiretorioArquivo() {
-        return diretorioArquivo;
-    }
-
-    public void setDiretorioArquivo(String diretorioArquivo) {
-        if (!diretorioArquivo.isEmpty()) {
-            this.diretorioArquivo = diretorioArquivo;
-        } else {
-            throw new IllegalArgumentException("Diretório inválido");
-        }
-    }
-
     public String getDiretorioCompleto() {
         return diretorioCompleto;
     }
@@ -64,7 +49,7 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
         if (!diretorioCompleto.isEmpty()) {
             this.diretorioCompleto = diretorioCompleto;
         } else {
-            throw new IllegalArgumentException("Diretório inválido");
+            this.showMessageBox("Diretório inválido");
         }
     }
 
@@ -189,21 +174,46 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_selecionarArquivoButtonActionPerformed
 
     private void analisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisarButtonActionPerformed
+        resultadoTextArea.setText("");
+        verificarCampoArquivo();
         try {
             obterValoresArquivos();
-            leitorDeHtml.setPath(this.diretorioCompleto);
-            String mensagem = validadorDeHtml.executar();
-            resultadoTextArea.append(mensagem);
+            if(!isNullOrEmpty(this.getDiretorioCompleto())){
+                leitorDeHtml.setPath(this.getDiretorioCompleto());
+                String mensagem = validadorDeHtml.executar();
+                resultadoTextArea.append(mensagem);
+            }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            this.showMessageBox(ex.getMessage());
         }
     }//GEN-LAST:event_analisarButtonActionPerformed
 
     private void obterValoresArquivos() {
-        if (arquivoImportado != null) {
-            this.setDiretorioCompleto(arquivoImportado.getSelectedFile().getAbsolutePath());
-            this.setDiretorioArquivo(arquivoImportado.getCurrentDirectory().toString());
+        if(arquivoImportado == null && !isNullOrEmpty(campoArquivo.getText())){
+            this.setDiretorioCompleto(campoArquivo.getText());
         }
+        else if(arquivoImportado == null && isNullOrEmpty(campoArquivo.getText())){
+            this.showMessageBox("Selecione um diretório");
+        }
+        else if (campoArquivo.getText() != null){
+            this.setDiretorioCompleto(arquivoImportado.getSelectedFile().getAbsolutePath());
+        }
+    }
+    
+    private void verificarCampoArquivo(){
+        if(isNullOrEmpty(campoArquivo.getText())){
+            this.diretorioCompleto = "";
+        }
+    }
+    
+    private void showMessageBox(String message){
+        JOptionPane.showMessageDialog(this, message);
+    }
+    
+    private boolean isNullOrEmpty(String obj){
+        boolean result = obj == null;
+        result = result || "".equals(obj);
+        return result;
     }
 
     /**

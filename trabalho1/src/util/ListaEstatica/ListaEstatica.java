@@ -24,8 +24,8 @@ public class ListaEstatica<T> {
         int indiceDoItem = -1; //retorna -1 se não encontrar o item
         for (int i = 0; i < tamanho; i++) {
 
-            Object itemAtual = info[i];
-            if (itemAtual == item) {
+            T itemAtual = info[i];
+            if (item.equals(itemAtual)) {
                 indiceDoItem = i;
                 break;
             }

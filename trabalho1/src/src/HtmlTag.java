@@ -9,11 +9,11 @@ public class HtmlTag {
     private final ListaEstatica<String> tagsSingletons;
 
     public HtmlTag(String nome, char tipo) {
-        this.tagsSingletons = new ListaEstatica<>();
-        this.inserirTagsSingletons();
-        this.setTagSingleton();
+        this.tagsSingletons = new ListaEstatica<String>();
         this.setNome(nome);
         this.setTipo(tipo);
+        this.inserirTagsSingletons();
+        this.setTagSingleton();
     }
 
     public String getNome() {
@@ -53,7 +53,7 @@ public class HtmlTag {
         int valor = this.tagsSingletons.buscar(this.getNome());
         if(valor != -1)
             tagSingleton = true;
-        else if(valor == -1)
+        else
             tagSingleton = false;
     }
 
