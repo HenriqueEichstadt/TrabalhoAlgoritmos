@@ -3,7 +3,10 @@ package apresentacao;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import src.LeitorDeHtml;
+import src.TagOcorrencia;
+import src.ValidacaoResponse;
 import src.ValidadorDeHtml;
 
 public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
@@ -103,10 +106,7 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
 
         tagsEncontradasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Tag", "Número de ocorrências"
@@ -180,14 +180,25 @@ public class ValidadorDeHtmlJFrame extends javax.swing.JFrame {
             obterValoresArquivos();
             if(!isNullOrEmpty(this.getDiretorioCompleto())){
                 leitorDeHtml.setPath(this.getDiretorioCompleto());
-                String mensagem = validadorDeHtml.executar();
-                resultadoTextArea.append(mensagem);
+                ValidacaoResponse validacao = validadorDeHtml.executar();
+                resultadoTextArea.append(validacao.getMensagem());
+                if(validacao.isArquivoBemFormatado()){
+                    adicionarOcorrenciasDasTagsNaTabela(validacao);
+                }
             }
         } catch (Exception ex) {
             this.showMessageBox(ex.getMessage());
         }
     }//GEN-LAST:event_analisarButtonActionPerformed
 
+    private void adicionarOcorrenciasDasTagsNaTabela(ValidacaoResponse validacao){
+        DefaultTableModel model = (DefaultTableModel)tagsEncontradasTable.getModel();
+        for(int i = 0; i < validacao.getOcorrencias().getTamanho(); i++){
+            TagOcorrencia tag = validacao.getOcorrencias().obterElemento(i);
+            model.addRow(new Object[] {tag.getNome(), tag.getNumeroOcorrencias()});
+        }
+    }
+    
     private void obterValoresArquivos() {
         if(arquivoImportado == null && !isNullOrEmpty(campoArquivo.getText())){
             this.setDiretorioCompleto(campoArquivo.getText());

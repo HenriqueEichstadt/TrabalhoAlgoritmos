@@ -1,5 +1,7 @@
 package apresentacao;
 
+import javax.swing.JFileChooser;
+
 public class ImportarArquivoForm extends javax.swing.JFrame {
     
     /**
@@ -43,9 +45,15 @@ public class ImportarArquivoForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivoActionPerformed
-        ValidadorDeHtmlJFrame.setArquivoImportado(arquivo);
-        ValidadorDeHtmlJFrame.setCampoArquivo(arquivo.getSelectedFile().getAbsolutePath());
-        this.dispose();
+        // Clicando no botão salvar
+        if(evt.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)){
+            ValidadorDeHtmlJFrame.setArquivoImportado(arquivo);
+            ValidadorDeHtmlJFrame.setCampoArquivo(arquivo.getSelectedFile().getAbsolutePath());
+            this.dispose();
+        }
+        else if(evt.getActionCommand().equals(JFileChooser.CANCEL_SELECTION)){
+            this.dispose();
+        }
     }//GEN-LAST:event_arquivoActionPerformed
 
     /**
