@@ -22,7 +22,7 @@ public class ValidadorDeHtml {
         extratorDeTags.extrair();
     }
     
-    public ValidacaoResponse validar(){
+    private ValidacaoResponse validar(){
         ValidacaoResponse validacao = new ValidacaoResponse();
         
         if(extratorDeTags.countTags() < 1){
